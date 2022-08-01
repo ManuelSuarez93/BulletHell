@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5231553206429393470}
   - component: {fileID: 5841490872753951230}
-  - component: {fileID: -8878090522912961922}
   - component: {fileID: 413839653960980701}
   - component: {fileID: 115077688854223437}
   m_Layer: 8
@@ -48,21 +47,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8878090522912961922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687127468366145198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a48540f030a3910439f0de0b1451e495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damageable: {fileID: 115077688854223437}
-  _maxHealth: 1
-  _go: {fileID: 0}
 --- !u!54 &413839653960980701
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -88,12 +72,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1687127468366145198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 216c82c251f031247930b95c3342f69d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b241d22d74c49e48a64bce0cd560972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageLayer:
+  _collisionLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 320
+  _endOfLevelLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &5528282705495769667
 GameObject:
   m_ObjectHideFlags: 0

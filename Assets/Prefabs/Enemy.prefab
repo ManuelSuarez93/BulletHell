@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7580404047893146947}
   - component: {fileID: 1906753862363091384}
   - component: {fileID: 1838076473523639147}
-  - component: {fileID: 6294339742397460335}
+  - component: {fileID: -5873933786686325594}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -60,11 +60,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba35c651f095a34ea94dfd5c054c65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageable: {fileID: 6294339742397460335}
-  _maxHealth: 1
-  _isEnemy: 1
-  _go: {fileID: 0}
---- !u!114 &6294339742397460335
+  _health: {fileID: -5873933786686325594}
+  _collisionLayer:
+    serializedVersion: 2
+    m_Bits: 320
+  _endOfLevelLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!114 &-5873933786686325594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,12 +76,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7580404047893146972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971c2864a45853e489204a7137b57309, type: 3}
+  m_Script: {fileID: 11500000, guid: aa64680115d42dd47a16271b521c6583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageLayer:
-    serializedVersion: 2
-    m_Bits: 320
+  _maxHealth: 1
 --- !u!1 &8850744371580184792
 GameObject:
   m_ObjectHideFlags: 0

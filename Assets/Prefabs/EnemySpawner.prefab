@@ -370,7 +370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5176722340728084296}
   - component: {fileID: 5176722340728084297}
-  - component: {fileID: 1220071158}
+  - component: {fileID: 5176722341657696703}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 7580404047893146972, guid: 6ac2475b0691cf14cb0884d566b13d33, type: 3}
   _maxPoolSize: 20
---- !u!114 &1220071158
+--- !u!114 &5176722341657696703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -427,14 +427,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5176722340728084303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 717219dafe0aeee40aa730187e9fd67d, type: 3}
+  m_Script: {fileID: 11500000, guid: f2306dfea0a563242950a2dee8216df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _direction: 5
-  _rate: 2
+  _rate: 1
   _speed: 5
-  _spawnRandom: 1
-  _spawnAmount: 5
+  _spawnRandom: 0
+  _spawnAmount: 1
   _pool: {fileID: 5176722340728084297}
   _spawnPoints:
   - {fileID: 842879067}
@@ -449,7 +449,6 @@ MonoBehaviour:
   - {fileID: 39505751}
   - {fileID: 1051425631}
   - {fileID: 533087568}
-  _isEnemy: 1
-  _waveSpeedIncrease: 1
-  _waveRate: 15
-  _wavePauseTime: 5
+  _waveSpeedIncrease: 2
+  _waveRate: 30
+  _wavePauseTime: 3

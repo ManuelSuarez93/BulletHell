@@ -1,9 +1,9 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoveButton : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 { 
     [SerializeField] private Button _btn;
     [SerializeField] private Transform _player;
@@ -28,11 +28,11 @@ public class MoveButton : MonoBehaviour
             #if PLATFORM_ANDROID
             var mousePos = _playerInput.Move.TouchPosition.ReadValue<Vector2>();
             #endif
-            
+
             var playerPos = Camera.main.ScreenToWorldPoint(mousePos) * _sensitivity;
 
             _player.position = new Vector3(playerPos.x, 1f, playerPos.z);
-            transform.position = new Vector3(playerPos.x, 1f, playerPos.z);
+            transform.position = new Vector3(mousePos.x, mousePos.y);
         }
     }
 
