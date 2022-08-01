@@ -1,0 +1,40 @@
+{
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "Move",
+            "id": "59bf935c-5210-4d8d-9cbe-f2777a320101",
+            "actions": [
+                {
+                    "name": "TouchPosition",
+                    "type": "PassThrough",
+                    "id": "3dd2445f-a287-42c8-b6ee-b3198aa7c6e4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "57e0a6f6-254b-40e9-9c58-eb0c077764f8",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Android",
+                    "action": "TouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Android",
+            "bindingGroup": "Android",
+            "devices": []
+        }
+    ]
+}
