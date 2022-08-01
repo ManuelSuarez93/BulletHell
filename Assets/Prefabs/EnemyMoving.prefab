@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1838076473523639147}
   - component: {fileID: -5873933786686325594}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: EnemyMoving
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,10 +63,17 @@ MonoBehaviour:
   _health: {fileID: -5873933786686325594}
   _collisionLayer:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 256
   _endOfLevelLayer:
     serializedVersion: 2
     m_Bits: 1024
+  _objective: {fileID: 0}
+  _player: {fileID: 0}
+  _animationSpeed: 4
+  _amplitude: 5
+  _animation: 1
+  _finishInObjective: 0
+  _finishInPlayer: 0
 --- !u!114 &-5873933786686325594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,13 +112,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8850744371580184792}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7580404047893146947}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &1419909637483915020
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -60,7 +60,7 @@ public class PlayerShoot : MonoBehaviour
     {
         var x = _pool.GetPrefab(true); 
         x.transform.localPosition = transform.localPosition;
-        var proj = x.GetComponent<PlayerProjectile>();
+        var proj = x.GetComponent<Projectile>();
         proj.SetDirection(_vectorDirection);
         proj.SetPool(_pool);
         proj.SetSpeed(_currentWeapon.Speed);

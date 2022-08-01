@@ -3,7 +3,7 @@ using System;
 using System.Data;
 using UnityEngine;
 
-public class PlayerProjectile: MonoBehaviour, IMovable
+public class Projectile: MonoBehaviour, IMovable
 { 
     [SerializeField] LayerMask _collisionLayer;
     [SerializeField] LayerMask _endOfLevelLayer;

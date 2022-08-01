@@ -1,20 +1,33 @@
+using General;
 using System.Collections.Generic; 
 using UnityEngine;
  
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] private List<PrefabPool> _pool;
+    [SerializeField] private Collider _player;
+    [Header("Enemy settings")]
     [SerializeField] private Direction _direction = Direction.up;
-    [SerializeField] private float _rate;
-    [SerializeField] private float _speed;
-    [SerializeField] private bool _spawnRandom;
+    [SerializeField] private float _rate = 1f;
+    [SerializeField] private float _speed = 5f;
+    [SerializeField] private bool _finishInObjective = false;
+    [SerializeField] private Collider _objective;
+
+    [Header("Enemy movement settings")]
+    [SerializeField] private bool _animate = false;
+    [SerializeField] private float _animSpeed = 1f;
+    [SerializeField] private float _amplitude = 1f; 
+
+    [Header("Spawner settings")]
+    [SerializeField] private bool _spawnRandom = false;
     [SerializeField] private int _spawnAmount = 1;
-    [SerializeField] private PrefabPool _pool;
-    [SerializeField] private List<Transform> _spawnPoints; 
-    [SerializeField] private float _waveSpeedIncrease;
-    [SerializeField] private float _waveRate;
-    [SerializeField] private float _wavePauseTime;
+    [SerializeField] private List<Transform> _spawnPoints;
+
+    [Header("Wave settings")]
+    [SerializeField] private float _waveSpeedIncrease = 1f;
+    [SerializeField] private float _waveRate = 15f;
+    [SerializeField] private float _wavePauseTime = 1f;
     [SerializeField] private int _spawnsPerWave = 5;
-    [SerializeField] Collider _objective;
 
     private float _timer, _waveTimer;
     private int _currentWave;
@@ -27,12 +40,11 @@ public class EnemySpawner : MonoBehaviour
         _direction == Direction.down ? Vector3.down :
         _direction == Direction.forward ? Vector3.forward :
         _direction == Direction.back ? Vector3.back : Vector3.zero;
-    enum Direction { left, right, up, down, forward, back }
+    
     private void Start()
-    {
+    { 
         _currentWave = 0;
         _timer = 0f;
-        Debug.Log($"Collider bounds: {_objective.bounds.center.z} Collider center plus Transform: {_objective.transform.position.z + _objective.bounds.center.z}");
     }
      
     private void Update()
@@ -76,29 +88,29 @@ public class EnemySpawner : MonoBehaviour
         if (_timer >= _rate)
         {
             _timer = 0f;
-            if(_spawnRandom)
-            { 
+            if (_spawnRandom)
+            {
                 int num = Random.Range(1, _spawnAmount);
                 for (int i = 0; i < num; i++)
-                    SpawnObject();
+                    SpawnObject(_pool[Random.Range(0, _pool.Count)]);
             }
             else 
-                SpawnObject();  
+                SpawnObject(_pool[Random.Range(0, _pool.Count)]);  
         }
         else 
             _timer += Time.deltaTime; 
     }
     
-    private void SpawnObject()
+    private void SpawnObject(PrefabPool pool)
     {
-        var x = _pool.GetPrefab(true); 
+        var x = pool.GetPrefab(true); 
         x.transform.localPosition = _spawnPoints.Count > 0 ? _spawnPoints[Random.Range(0, _spawnPoints.Count)].position : transform.position;
         var e = x.GetComponent<Enemy>();
         e.SetDirection(_vectorDirection);
-        e.SetPool(_pool);
+        e.SetPool(pool);
         e.SetSpeed(_speed);
         e.SetOnDisable(() => RemoveFromList(e.gameObject));
-        e.SetObjective(_objective);
+        e.SetObjective(_objective, _player); 
         _currentlySpawned.Add(e.gameObject);
     }
 
