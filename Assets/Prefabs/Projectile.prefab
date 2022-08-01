@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collisionLayer:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 128
   _endOfLevelLayer:
     serializedVersion: 2
     m_Bits: 2048

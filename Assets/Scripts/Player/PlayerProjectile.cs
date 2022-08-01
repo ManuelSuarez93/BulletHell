@@ -29,14 +29,13 @@ public class PlayerProjectile: MonoBehaviour, IMovable
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((_collisionLayer & (1 << other.gameObject.layer)) > 0  ) 
+        if ((_collisionLayer & 1 << other.gameObject.layer) > 0  ) 
         {
             other.GetComponent<Health>()?.RemoveHealth(_damage);
             ReturnObjectToPool();
         }
-        else if ((_endOfLevelLayer.value & 1 << (other.gameObject.layer)) > 0  ) 
-            ReturnObjectToPool(); 
-            
+        else if ((_endOfLevelLayer.value & 1 << other.gameObject.layer) > 0  ) 
+            ReturnObjectToPool();  
     }
 
     

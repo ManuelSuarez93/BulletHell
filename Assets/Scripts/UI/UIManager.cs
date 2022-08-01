@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _weaponName;
     int _score;
 
-    void Start()
+    void Awake()
     {
         if (Instance != null && Instance != this) 
             Destroy(this); 

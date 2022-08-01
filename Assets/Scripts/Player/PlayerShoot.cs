@@ -58,13 +58,13 @@ public class PlayerShoot : MonoBehaviour
 
     private void Shoot()
     {
-        var x = _pool.GetPrefab(true);
-        x.transform.parent = null;
-        x.transform.localPosition = transform.position;
-        var e = x.GetComponent<PlayerProjectile>();
-        e.SetDirection(_vectorDirection);
-        e.SetPool(_pool);
-        e.SetSpeed(_currentWeapon.Speed);
+        var x = _pool.GetPrefab(true); 
+        x.transform.localPosition = transform.localPosition;
+        var proj = x.GetComponent<PlayerProjectile>();
+        proj.SetDirection(_vectorDirection);
+        proj.SetPool(_pool);
+        proj.SetSpeed(_currentWeapon.Speed);
+        proj.SetDamage(_currentWeapon.Damage);
     }
 
     public void Switch(bool next)
