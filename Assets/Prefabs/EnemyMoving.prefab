@@ -245,8 +245,9 @@ MonoBehaviour:
     m_Bits: 1024
   _objective: {fileID: 0}
   _player: {fileID: 0}
-  _animationSpeed: 4
-  _amplitude: 5
+  _animationSpeed: 0.5
+  _amplitude: 7
+  _animationRate: 0.2
   _animation: 1
   _finishInObjective: 0
   _finishInPlayer: 0
@@ -269,7 +270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 1
-  _spriteRenderer: {fileID: 0}
   _img: {fileID: 3593334899344068258}
 --- !u!1 &8850744371580184792
 GameObject:

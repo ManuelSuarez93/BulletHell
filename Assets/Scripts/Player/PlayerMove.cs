@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
 { 
     [SerializeField] private Button _btn;
     [SerializeField] private Transform _player;
+    [SerializeField] private float _offset;
     [SerializeField] private float _sensitivity = 5f;
 
     private PlayerInput _playerInput;
@@ -31,7 +32,7 @@ public class PlayerMove : MonoBehaviour
 
             var playerPos = Camera.main.ScreenToWorldPoint(mousePos) * _sensitivity;
 
-            _player.position = new Vector3(playerPos.x, 1f, playerPos.z);
+            _player.position = new Vector3(playerPos.x, 1f, playerPos.z + _offset);
             transform.position = new Vector3(mousePos.x, mousePos.y);
         }
     }

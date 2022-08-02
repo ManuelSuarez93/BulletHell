@@ -58,13 +58,23 @@ public class PlayerShoot : MonoBehaviour
 
     private void Shoot()
     {
-        var x = _pool.GetPrefab(true); 
-        x.transform.localPosition = transform.localPosition;
-        var proj = x.GetComponent<Projectile>();
-        proj.SetDirection(_vectorDirection);
-        proj.SetPool(_pool);
-        proj.SetSpeed(_currentWeapon.Speed);
-        proj.SetDamage(_currentWeapon.Damage);
+        var angleDifference = _currentWeapon.ProjectilesAmount > 1 ?  (180f / (_currentWeapon.ProjectilesAmount - 1)) : 0;
+        var totalAngle = -90f;
+        for(int i = 0; i < _currentWeapon.ProjectilesAmount; i++)
+        { 
+            var x = _pool.GetPrefab(true);
+            x.transform.localPosition = transform.localPosition;
+            if(_currentWeapon.ProjectilesAmount > 1)
+            { 
+                x.transform.localEulerAngles = new Vector3(0, totalAngle, 0);
+                totalAngle += angleDifference; 
+            }
+            var proj = x.GetComponent<Projectile>();
+            proj.SetDirection(_vectorDirection);
+            proj.SetPool(_pool);
+            proj.SetSpeed(_currentWeapon.Speed);
+            proj.SetDamage(_currentWeapon.Damage);
+        }
     }
 
     public void Switch(bool next)

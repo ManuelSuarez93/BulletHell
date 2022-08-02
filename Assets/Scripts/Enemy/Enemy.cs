@@ -11,8 +11,9 @@ public class Enemy : MonoBehaviour, IMovable
     [SerializeField] LayerMask _endOfLevelLayer;
     [SerializeField] Collider _objective;
     [SerializeField] Collider _player;
-    [SerializeField] float _animationSpeed = 1f;
+    [SerializeField] private float _animationSpeed = 1f;
     [SerializeField] private float _amplitude;
+    [SerializeField] private float _animationRate = 0.5f;
     [SerializeField] private bool _animation = false;
     [SerializeField] private bool _finishInObjective;
     [SerializeField] private bool _finishInPlayer = false;
@@ -94,7 +95,11 @@ public class Enemy : MonoBehaviour, IMovable
 
     public void CheckIfDeath()
     {
-        if (_health.CurrentHealth <= 0) ReturnToPool();
+        if (_health.CurrentHealth <= 0)
+        {
+            ReturnToPool();
+            _health.ResetHealth();
+        }
     }
     public void SetOnDisable(Action action) => _onDisable = action; 
     private void OnDisable() => _onDisable?.Invoke();
@@ -127,7 +132,7 @@ public class Enemy : MonoBehaviour, IMovable
         Vector3 p;
         p.y = u;
         p.z = v;
-        p.x = Mathf.Sin(Mathf.PI * (u + v + t)) * _amplitude;
+        p.x = Mathf.Sin(Mathf.PI * (t + ((u + v) * _animationRate))) * _amplitude;
 
         return p;
     }
