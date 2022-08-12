@@ -19,6 +19,5 @@ public class Health : MonoBehaviour
     public void ChangeHealth(int health) => _currentHealth = health;
     public void RemoveHealth(int health) => _currentHealth -= health;
     public void AddHealth(int health) => _currentHealth += health;
-
-    internal void ResetHealth() => _currentHealth = _maxHealth;
+    public void ResetHealth() => _currentHealth = _maxHealth;
 }

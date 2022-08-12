@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
         {
 
             #if PLATFORM_ANDROID
-            var mousePos = _playerInput.Move.TouchPosition.ReadValue<Vector2>();
+                var mousePos = _playerInput.Move.TouchPosition.ReadValue<Vector2>();
             #endif
 
             var playerPos = Camera.main.ScreenToWorldPoint(mousePos) * _sensitivity;
