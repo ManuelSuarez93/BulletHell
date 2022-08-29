@@ -1,33 +1,31 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using General;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private TextMeshProUGUI _lifeText;
+    [SerializeField] private TextMeshProUGUI _scoreText; 
     [SerializeField] private TextMeshProUGUI _weaponName;
-    int _score;
+    [SerializeField] private Image _specialMeter;
+    [SerializeField] private Image _health;
 
     void Awake()
     {
         if (Instance != null && Instance != this) 
             Destroy(this); 
         else 
-            Instance = this; 
+            Instance = this;  
+    }
+    public void SetHealth(float healthpct) => _health.fillAmount = healthpct;
+    public void SetScoreText(int s) => _scoreText.text = $"SCORE:{GameManager.Instance.Score}";
 
-        _score = 0;
-    } 
-    public void SetHealth(int h) => _lifeText.text = $"LIFE:{h}";
-    public void SetWeaponName(string name) => _weaponName.text = $"WEAPON: {name}";
-    public void AddToScore(int s)
+    public void SetCooldownSpecial(float specailpct)
     {
-        _score += s;
-        _scoreText.text = $"SCORE:{_score}";
+        _specialMeter.color = Color.Lerp(Color.red, Color.green, specailpct);
+        _specialMeter.fillAmount = specailpct;
     }
 
 }

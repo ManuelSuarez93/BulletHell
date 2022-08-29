@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Data;
-using UnityEngine;
+﻿using UnityEngine;
+using Pooling;
 
 public class Projectile: MonoBehaviour, IMovable
 { 

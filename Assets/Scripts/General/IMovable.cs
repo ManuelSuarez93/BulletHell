@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-internal interface IMovable : IPoolable
+internal interface IMovable
 {
     public Vector3 Direction { get; }
     public float Speed { get; }

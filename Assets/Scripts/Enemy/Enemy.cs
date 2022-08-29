@@ -1,10 +1,8 @@
+using System; 
+using UnityEngine; 
 using General;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEngine;
-public class Enemy : MonoBehaviour, IMovable
+using Pooling;
+public class Enemy : MonoBehaviour, IMovable, IPoolable
 {
     [SerializeField] private Health _health;
     [SerializeField] LayerMask _collisionLayer;
@@ -76,7 +74,7 @@ public class Enemy : MonoBehaviour, IMovable
     }
 
     private void Movement()
-    {
+    { 
         if(_finishInObjective)
         { 
             if (_objective != null && transform.localPosition.z >= _objective.bounds.center.z) 
@@ -103,7 +101,7 @@ public class Enemy : MonoBehaviour, IMovable
     }
     public void SetOnDisable(Action action) => _onDisable = action; 
     private void OnDisable() => _onDisable?.Invoke();
-    private void AddToScore() => UIManager.Instance.AddToScore(1);
+    private void AddToScore() => GameManager.Instance.SetScore(GameManager.Instance.Score + 1);
 
     private void OnTriggerEnter(Collider other)
     {

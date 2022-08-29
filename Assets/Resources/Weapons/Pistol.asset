@@ -9,6 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de7361b201feb7a4187882ba664065b7, type: 3}
-  m_Name: Shotgun
+  m_Script: {fileID: 11500000, guid: 4bd617652335d314e90c19a22f143e34, type: 3}
+  m_Name: Pistol
   m_EditorClassIdentifier: 
+  WeaponType: 0
+  ShootRate: 1
+  Damage: 1
+  ProjectileSpeed: 5
+  Projectile: {fileID: 1687127468366145198, guid: de21e8f6df9098d4cb8da10f51f185c2, type: 3}
