@@ -660,7 +660,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939129935}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: -1, z: -1}
+  m_LocalPosition: {x: 1.5, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1418569329}
@@ -685,7 +685,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: df9f98fb396535d4c95594b9672cf4db, type: 2}
+  - {fileID: 2100000, guid: 3ba42d5974e049942b848b7e658d22ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -859,8 +859,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1418569330}
-        m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
-        m_MethodName: SwitchWeapon
+        m_TargetAssemblyTypeName: Player.Player, Assembly-CSharp
+        m_MethodName: SwitchShip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -934,7 +934,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069989386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: -1, z: -1}
+  m_LocalPosition: {x: -1.5, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1418569329}
@@ -959,7 +959,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: df9f98fb396535d4c95594b9672cf4db, type: 2}
+  - {fileID: 2100000, guid: f294f2fb483afc9488b856af9cfadec5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1864,7 +1864,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1418569329}
   - component: {fileID: 1418569328}
-  - component: {fileID: 1418569327}
   - component: {fileID: 1418569326}
   - component: {fileID: 1418569331}
   - component: {fileID: 1418569330}
@@ -1891,22 +1890,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &1418569327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418569325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a598e6151bbf58844bcd09c1251ffe2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: {fileID: 1418569331}
-  _collisionLayer:
-    serializedVersion: 2
-    m_Bits: 640
 --- !u!65 &1418569328
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1949,14 +1932,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e948a0d431c6e8047be481bdd928b536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapons:
-  - Name: Pistol
-    Type: 0
-  - Name: Rifle
-    Type: 1
-  _specials:
-  - Name: Shotgun
-    Type: 0
+  _health: {fileID: 1418569331}
+  _collisionLayer:
+    serializedVersion: 2
+    m_Bits: 640
+  _ships:
+  - Name: 
+    Special: 0
+    Weapon: 1
+    ShipObject: {fileID: 1836427556}
+  - Name: 
+    Special: 0
+    Weapon: 0
+    ShipObject: {fileID: 939129935}
+  - Name: 
+    Special: 0
+    Weapon: 0
+    ShipObject: {fileID: 1069989386}
   _direction: 4
   _weapon:
     _pool: {fileID: 1305180548}
@@ -1964,6 +1956,7 @@ MonoBehaviour:
   _special:
     _pool: {fileID: 1851083010}
     _timer: {fileID: 882235516}
+  _shipSwitchSpeed: 0.25
 --- !u!114 &1418569331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1977,7 +1970,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 5
-  _img: {fileID: 0}
 --- !u!1 &1508130943
 GameObject:
   m_ObjectHideFlags: 0
@@ -2341,7 +2333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836427556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1418569329}

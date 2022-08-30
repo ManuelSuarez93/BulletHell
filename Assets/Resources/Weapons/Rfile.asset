@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd617652335d314e90c19a22f143e34, type: 3}
   m_Name: Rfile
   m_EditorClassIdentifier: 
-  WeaponType: 0
+  WeaponType: 1
   ShootRate: 0.25
   Damage: 3
   ProjectileSpeed: 5

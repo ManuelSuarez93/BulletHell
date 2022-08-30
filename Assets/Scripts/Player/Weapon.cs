@@ -59,6 +59,8 @@ namespace Player
             else 
                 Debug.LogError($"Error: no weapon data found for type:{type}"); 
 
+            _timer.SetTimer(_currentData.ShootRate);
+            
         }
 
 
