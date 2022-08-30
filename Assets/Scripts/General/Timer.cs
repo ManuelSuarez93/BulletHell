@@ -7,7 +7,7 @@ namespace General
     public class Timer : MonoBehaviour
     {
         private float _currentTime = 0f;
-        private float _time = 0f;
+        [SerializeField] private float _time = 0f;
         private bool _isStopped = false;
         private Action _onTimerAction, _onFinishAction; 
         public bool Stopped => _isStopped;
@@ -34,11 +34,8 @@ namespace General
             }
         }
 
-        public void SetTimer(float time) 
-            => _time = time;
-
-        public void Stop(bool stop) => _isStopped = stop;
-
+        public void SetTimer(float time) => _time = time; 
+        public void Stop(bool stop) => _isStopped = stop; 
         public void SetFinishAction(Action action) => _onFinishAction = action;
         public void SetUpdateAction(Action action) => _onTimerAction = action;
 

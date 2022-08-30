@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using General;
+using System.Collections.Generic; 
+using static General.Global;
 using UnityEngine;
 
 namespace Player
@@ -62,6 +62,7 @@ namespace Player
             _currentShipIndex = _currentShipIndex == _ships.Count - 1 ? 0 : ++_currentShipIndex;  
             var nextShip = _currentShipIndex == _ships.Count - 1 ? 0 : _currentShipIndex + 1;  
             _weapon.SetWeapon(_ships[_currentShipIndex].Weapon); 
+            _special.SetSpecial(_ships[_currentShipIndex].Special);
             StopCoroutine(MoveShips(0,0,0));
             StartCoroutine(MoveShips(oldShip, _currentShipIndex, nextShip));
             

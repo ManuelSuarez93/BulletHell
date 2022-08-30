@@ -5,17 +5,25 @@ namespace Pooling
 {
     public class PrefabPool : MonoBehaviour
     {
-        [SerializeField] GameObject _prefab; 
-        [SerializeField] int _maxPoolSize;
-        Queue<GameObject> _queue = new Queue<GameObject>();
+        [SerializeField] private GameObject _prefab; 
+        [SerializeField] private int _maxPoolSize;
+        [SerializeField] private bool _initializeOnAwake = true;
+        private Queue<GameObject> _queue = new Queue<GameObject>();
+        
 
-        void Awake()
-        { 
-            for(int i = 0; i <= _maxPoolSize; i++)
+        private void Awake()
+        {
+            if (_initializeOnAwake)
+                CreatePrefabs();
+        }
+
+        public void CreatePrefabs()
+        {
+            for (int i = 0; i <= _maxPoolSize; i++)
                 InstantiatePrefabs();
         }
 
-        void InstantiatePrefabs()
+        private void InstantiatePrefabs()
         {
             var o = Instantiate(_prefab, transform); 
             _queue.Enqueue(o); 
@@ -36,6 +44,8 @@ namespace Pooling
             if(Deactivate) go.SetActive(false);
                 _queue.Enqueue(go);
         }
+
+        public void SetPrefab(GameObject newPrefab) => _prefab = newPrefab;
     }
 
 }

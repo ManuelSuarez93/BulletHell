@@ -1,4 +1,4 @@
-using General;
+using static General.Global;
 using System.Collections.Generic; 
 using UnityEngine;
  
