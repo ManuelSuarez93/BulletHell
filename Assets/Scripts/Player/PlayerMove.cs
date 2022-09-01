@@ -21,7 +21,7 @@ namespace Player
         public void ButtonNotPressed() => _btnPressed = false;
 
         private void Start()
-        {
+        { 
             _playerInput = new PlayerInput();
             _playerInput.Enable();
         }
@@ -30,9 +30,9 @@ namespace Player
             if (_btnPressed)
             {
                 var mousePos = Vector3.zero;
-
+            
                 #if PLATFORM_ANDROID
-                                mousePos = _playerInput.Move.TouchPosition.ReadValue<Vector2>(); 
+                            mousePos = _playerInput.Move.TouchPosition.ReadValue<Vector2>(); 
                 #else
                             mousePos = _playerInput.Move.MousePosition.ReadValue<Vector2>();
                 #endif

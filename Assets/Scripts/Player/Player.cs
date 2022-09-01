@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic; 
 using static General.Global;
+using General;
 using UnityEngine;
 
 namespace Player
@@ -12,20 +13,16 @@ namespace Player
         [SerializeField] private Health _health; 
         [SerializeField] private LayerMask _collisionLayer;  
         [SerializeField] private List<Ship> _ships; 
-        [SerializeField] private Direction _direction; 
-        [SerializeField] private Weapon _weapon; 
+        [SerializeField] private Direction _projectileDirection; 
         [SerializeField] private Special _special;  
         [SerializeField] private float _shipSwitchSpeed;
+        [SerializeField] private Weapon _weapon, _supportW1, _supportW2; 
+        
         private int _currentShipIndex;  
+        private int[] _supportShipIndex= new int[2];
         private float _timer;  
         
-        private Vector3 _vectorDirection =>
-                        _direction == Direction.left ? Vector3.left :
-                        _direction == Direction.right ? Vector3.right :
-                        _direction == Direction.up ? Vector3.up :
-                        _direction == Direction.down ? Vector3.down :
-                        _direction == Direction.forward ? Vector3.forward :
-                        _direction == Direction.back ? Vector3.back : Vector3.zero;
+        
         private Vector3[] _shipPositions = new Vector3[3];
         #endregion 
 
@@ -35,7 +32,9 @@ namespace Player
             for(int i=0; i < _shipPositions.Length; i++) 
                 _shipPositions[i] = _ships[i].ShipObject.transform.localPosition;
 
-            _weapon.InitializeWeapon(); 
+            _weapon.InitializeWeapon(_ships[0]);  
+            _supportW1.InitializeWeapon(_ships[0]);  
+            _supportW2.InitializeWeapon(_ships[0]); 
             _weapon.SetWeapon((WeaponType)0);
             _special.InitializeSpecial();
         }
@@ -44,28 +43,31 @@ namespace Player
         {
             UIManager.Instance.SetHealth(_health.HealthPcnt);
             _timer = 0f; 
-            _currentShipIndex = 0;
+            _currentShipIndex = 1;
+            _supportShipIndex[0] = 0;
+            _supportShipIndex[1] = 2;
         }
 
         public void Update()
         {
-            _weapon.Shoot(transform, _vectorDirection); 
+            _weapon.Shoot(_ships[_currentShipIndex].ShipObject.transform, VectorDirection(_projectileDirection));  
+            _supportW1.Shoot(_ships[_supportShipIndex[0]].ShipObject.transform); 
+            _supportW2.Shoot(_ships[_supportShipIndex[1]].ShipObject.transform); 
+            
         }
         #endregion
         
-        public void UseSpecial() => _special.UseSpecialcial(transform, _vectorDirection, _ships[_currentShipIndex].Special);
+        public void UseSpecial() => _special.UseSpecialcial(transform, VectorDirection(_projectileDirection), _ships[_currentShipIndex].Special);
 
         public void SwitchShip()
-        {
-
-            var oldShip = _currentShipIndex;
+        { 
+            _supportShipIndex[0] = _currentShipIndex;
             _currentShipIndex = _currentShipIndex == _ships.Count - 1 ? 0 : ++_currentShipIndex;  
-            var nextShip = _currentShipIndex == _ships.Count - 1 ? 0 : _currentShipIndex + 1;  
+            _supportShipIndex[1] = _currentShipIndex == _ships.Count - 1 ? 0 : _currentShipIndex + 1;  
             _weapon.SetWeapon(_ships[_currentShipIndex].Weapon); 
             _special.SetSpecial(_ships[_currentShipIndex].Special);
             StopCoroutine(MoveShips(0,0,0));
-            StartCoroutine(MoveShips(oldShip, _currentShipIndex, nextShip));
-            
+            StartCoroutine(MoveShips(_supportShipIndex[0], _currentShipIndex, _supportShipIndex[1])); 
 
         }
  
@@ -74,7 +76,7 @@ namespace Player
             var timer = 0f;
             while (timer < _shipSwitchSpeed)
             {
-
+                
                 var oldpos = _ships[oldship].ShipObject.transform.localPosition;
                 var newpos = _ships[newship].ShipObject.transform.localPosition; 
                 var nextpos = _ships[nextship].ShipObject.transform.localPosition;

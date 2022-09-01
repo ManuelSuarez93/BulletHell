@@ -11,20 +11,28 @@ namespace Player
     public class Weapon
     {   
         [SerializeField] private PrefabPool _pool;
+        [SerializeField] private GameObject _supportProjectile;
+        [SerializeField] private bool _isSupportWeapon;
+        [SerializeField] private Direction _direction;
         [SerializeField] private Timer _timer;
+
         private List<WeaponData> _weaponData;  
         private WeaponData _currentData;
         private bool _canShoot;
         public float ShootRate => _currentData.ShootRate; 
 
-        public void InitializeWeapon() 
+        public void InitializeWeapon(Ship newShip) 
         {        
             _weaponData = 
                 Resources
                 .LoadAll<WeaponData>("Weapons")
                 .ToList();
-            
-            _currentData = _weaponData?[0];
+             
+            _currentData = 
+                    _isSupportWeapon ? _weaponData?.FirstOrDefault(x => x.WeaponType == WeaponType.Pistol) :  
+                    _weaponData?.FirstOrDefault(x => x.WeaponType == newShip.Weapon);  
+
+
             _timer.SetFinishAction(() => 
                 {
                     _canShoot = true;
@@ -35,14 +43,14 @@ namespace Player
             _timer.Stop(false);
         }
                 
-        public void Shoot(Transform transform, Vector3 vectorDirection)
+        public void Shoot(Transform transform, Vector3 vectorDirection = default(Vector3))
         {
             if(!_canShoot) return;
 
-            var x = _pool.GetPrefab(true);
-            x.transform.localPosition = transform.localPosition; 
+                var x = _pool.GetPrefab(true);
+            x.transform.position = transform.position; 
             var proj = x.GetComponent<Projectile>();
-            proj.SetDirection(vectorDirection);
+            proj.SetDirection(_isSupportWeapon? VectorDirection(_direction) :  vectorDirection);
             proj.SetPool(_pool);
             proj.SetSpeed(_currentData.ProjectileSpeed);
             proj.SetDamage(_currentData.Damage);
@@ -50,7 +58,7 @@ namespace Player
             _canShoot = false;
             _timer.Stop(false);
         } 
-
+ 
         public void SetWeapon(WeaponType type)
         {
             var data = _weaponData.FirstOrDefault(x => x.WeaponType == type);

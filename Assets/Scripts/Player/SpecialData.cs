@@ -10,6 +10,7 @@ namespace Player
         public SpecialType Type;
         public float CooldownTime;
         public int Damage; 
+        public int Cost;
         public int ProjectileAmount;
         public float ProjectileSpeed; 
         public GameObject Projectile;  

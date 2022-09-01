@@ -1,13 +1,35 @@
-﻿using System.Security.AccessControl;
+﻿using System.Security.Cryptography;
+using System.Security.AccessControl;
 using UnityEngine;
 
 namespace General
 {   
     public static class Global
     {
-        public enum Direction { left, right, up, down, forward, back }  
+        public enum Direction { left, right, up, down, forward, back, upleft, upright, downright, downleft}  
         public enum SpecialType { Shotgun, Laser, Explosion} 
         public enum WeaponType { Pistol, Rifle, MachineGun, Rocket }  
+
+        public  static Vector3 VectorDirection(Direction direction)
+        {
+            switch (direction)
+            {
+                
+                case Direction.left : return Vector3.left;
+                case Direction.right : return Vector3.right;
+                case Direction.back : return Vector3.back;
+                case Direction.forward : return Vector3.forward;
+                case Direction.down : return Vector3.down;
+                case Direction.up : return Vector3.up;
+                case Direction.upleft : return (Vector3.forward - Vector3.left).normalized;
+                case Direction.upright : return (Vector3.forward - Vector3.right ).normalized;
+                case Direction.downleft: return (Vector3.down - Vector3.left).normalized;
+                case Direction.downright : return (Vector3.down - Vector3.left).normalized;
+
+
+                default: return Vector3.zero;
+            } 
+        }
         [System.Serializable]
         public struct Ship
         {

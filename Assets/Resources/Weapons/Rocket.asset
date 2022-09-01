@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd617652335d314e90c19a22f143e34, type: 3}
-  m_Name: Rfile
+  m_Name: Rocket
   m_EditorClassIdentifier: 
-  WeaponType: 1
-  ShootRate: 1
-  Damage: 15
-  ProjectileSpeed: 30
-  Projectile: {fileID: 1687127468366145198, guid: de21e8f6df9098d4cb8da10f51f185c2, type: 3}
+  WeaponType: 3
+  ShootRate: 2
+  Damage: 20
+  ProjectileSpeed: 5
+  Projectile: {fileID: 3613366391228593338, guid: 553072657892ac24ea754f7b8aed3f5e, type: 3}
