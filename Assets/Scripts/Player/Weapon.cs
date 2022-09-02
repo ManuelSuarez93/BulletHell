@@ -23,10 +23,7 @@ namespace Player
 
         public void InitializeWeapon(Ship newShip) 
         {        
-            _weaponData = 
-                Resources
-                .LoadAll<WeaponData>("Weapons")
-                .ToList();
+            _weaponData = LoadResources<WeaponData>(WEAPON_FOLDER);
              
             _currentData = 
                     _isSupportWeapon ? _weaponData?.FirstOrDefault(x => x.WeaponType == WeaponType.Pistol) :  

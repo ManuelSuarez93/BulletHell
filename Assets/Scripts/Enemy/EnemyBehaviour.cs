@@ -2,7 +2,7 @@ using System;
 using UnityEngine; 
 using General;
 using Pooling;
-public class Enemy : MonoBehaviour, IMovable, IPoolable
+public class EnemyBehaviour : MonoBehaviour, IMovable, IPoolable
 {
     [SerializeField] private Health _health;
     [SerializeField] LayerMask _collisionLayer;
@@ -29,11 +29,8 @@ public class Enemy : MonoBehaviour, IMovable, IPoolable
     private PrefabPool _pool;
     private GameObject _go;
     private Action _onDisable;
-
-    public PrefabPool Pool => _pool;
-    public GameObject GameObject => _go; 
-    public Vector3 Direction => _direction; 
-    public float Speed => _speed; 
+ 
+    #region Setters
     public void SetDirection(Vector3 direction) => _direction = direction;
     public void SetSpeed(float speed) => _speed = speed;
     public void SetDamage(int damage) => _damage = damage;
@@ -49,6 +46,7 @@ public class Enemy : MonoBehaviour, IMovable, IPoolable
         _amplitude = amplitude;
         _animationSpeed = animationSpeed;
     }
+    #endregion
     private void ReturnToPool() => _pool.ReturnPrefab(this.gameObject, true);
 
     private void  Update()

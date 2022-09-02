@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf0621683329f2d4f83238e9ec701645, type: 3}
-  m_Name: Laser
+  m_Script: {fileID: 11500000, guid: 23690dccc04ae5f41a5b06e31730744f, type: 3}
+  m_Name: Moving
   m_EditorClassIdentifier: 
-  Type: 1
-  CooldownTime: 3
-  Damage: 1
-  Cost: 0
-  ProjectileAmount: 0
-  ProjectileSpeed: 0
-  Projectile: {fileID: 2797567331344293407, guid: 7e67d5084e385bc4bb05c710965e5f8c, type: 3}
+  _enemyObject: {fileID: 7580404047893146972, guid: 6ac2475b0691cf14cb0884d566b13d33, type: 3}
+  _type: 1

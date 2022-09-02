@@ -352,8 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa64680115d42dd47a16271b521c6583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 3
-  _img: {fileID: 497579614112333777}
+  _maxHealth: 30
 --- !u!114 &8471215602704232431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,6 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 7235867045612599213, guid: b42c19c3a39721449853219918c59de3, type: 3}
   _maxPoolSize: 100
+  _initializeOnAwake: 1
 --- !u!1 &8432694119208778034
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,10 +24,7 @@ namespace Player
         public void InitializeSpecial() 
         {
             //Get special data
-            _specialData = 
-                Resources
-                .LoadAll<SpecialData>("Specials")
-                .ToList(); 
+            _specialData = LoadResources<SpecialData>(SPECIAL_FOLDER);
          
             _currentData = _specialData?[0];
             _timer.SetFinishAction(() => 

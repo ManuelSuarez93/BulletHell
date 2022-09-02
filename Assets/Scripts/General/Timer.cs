@@ -36,6 +36,7 @@ namespace General
 
         public void SetTimer(float time) => _time = time; 
         public void Stop(bool stop) => _isStopped = stop; 
+        public void RestartTimer() => _currentTime = 0f;
         public void SetFinishAction(Action action) => _onFinishAction = action;
         public void SetUpdateAction(Action action) => _onTimerAction = action;
 

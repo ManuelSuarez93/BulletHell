@@ -1,15 +1,20 @@
-﻿using System.Security.Cryptography;
-using System.Security.AccessControl;
-using UnityEngine;
+﻿using UnityEngine; 
+using System.Collections.Generic;
+using System.Linq;
 
 namespace General
 {   
     public static class Global
     {
         public enum Direction { left, right, up, down, forward, back, upleft, upright, downright, downleft}  
+        public enum EnemyType{Stay, Moving}
         public enum SpecialType { Shotgun, Laser, Explosion} 
-        public enum WeaponType { Pistol, Rifle, MachineGun, Rocket }  
-
+        public enum WeaponType { Pistol, Rifle, MachineGun, Rocket }
+        public const string SPECIAL_FOLDER = "Specials";
+        public const string WEAPON_FOLDER = "Weapons";
+        public const string ENEMYWAVE_FOLDER = "EnemyWaves";
+        public const string ENEMY_FOLDER = "Enemy"; 
+        public static List<T> LoadResources<T>(string folderName) where T : Object => Resources.LoadAll<T>(folderName).ToList();
         public  static Vector3 VectorDirection(Direction direction)
         {
             switch (direction)
