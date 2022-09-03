@@ -10,6 +10,7 @@ public class EnemyWave : ScriptableObject
     [SerializeField] private float _wavePauseTime = 1f; 
     [SerializeField] private int _level;
     [SerializeField] private int _difficulty;
+    [SerializeField] private int _levelArea;
     [SerializeField] private List<EnemyTypeData> _enemyDatas;
 
     public float WaveSpeedIncrease { get => _waveSpeedIncrease; set => _waveSpeedIncrease = value; }
@@ -19,11 +20,6 @@ public class EnemyWave : ScriptableObject
     public int Difficulty { get => _difficulty; set => _difficulty = value; }
     public List<EnemyTypeData> EnemyDatas { get => _enemyDatas; set => _enemyDatas = value; }
 
-    [System.Serializable]
-    public struct EnemyTypeData
-    {
-        public EnemyType Type;
-        public int SpawnAmount;
-        public float TimeAfterNext;
-    }
+   
 }  
+ 

@@ -14,6 +14,7 @@ namespace General
         public const string WEAPON_FOLDER = "Weapons";
         public const string ENEMYWAVE_FOLDER = "EnemyWaves";
         public const string ENEMY_FOLDER = "Enemy"; 
+        public const string LEVEL_FOLDER = "Levels";
         public static List<T> LoadResources<T>(string folderName) where T : Object => Resources.LoadAll<T>(folderName).ToList();
         public  static Vector3 VectorDirection(Direction direction)
         {
@@ -34,6 +35,14 @@ namespace General
 
                 default: return Vector3.zero;
             } 
+        } 
+        [System.Serializable]
+    public struct EnemyTypeData
+        {
+            public EnemyType Type;
+            public int SpawnAmount;
+            public float TimeAfterNextSpawn;
+            public float TimeAfterNextWave;
         }
         [System.Serializable]
         public struct Ship

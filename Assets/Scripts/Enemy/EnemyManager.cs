@@ -31,18 +31,19 @@ namespace Enemy
         [Header("Grid")]
         [SerializeField] private GridMap _grid;
         private List<EnemyData> _enemies; 
-        private List<EnemyWave> _waveData;
-        private EnemyData _currentData;
+        private List<Level> _levels;
+        private EnemyTypeData _currentData;
         private EnemyWave _currentWave;
+        private bool _isCurrentWaveFinished;
+        private int _currentDataIndex;
         private Dictionary<EnemyType, PrefabPool> _poolDictionary = new Dictionary<EnemyType, PrefabPool>();
         List<GameObject> _currentlySpawned = new List<GameObject>(); 
 
         void Awake()
-        {     
-            _waveData = LoadResources<EnemyWave>(ENEMYWAVE_FOLDER);
+        {      
+            _currentDataIndex = -1;
             _enemies = LoadResources<EnemyData>(ENEMY_FOLDER);
-
-            _currentWave = _waveData?[0];
+            _levels = LoadResources<Level>(LEVEL_FOLDER);
             
             for (int i = 0; i < _pools.Count; i++)
             { 
@@ -52,17 +53,45 @@ namespace Enemy
                 _pools[i].CreatePrefabs();
                 _poolDictionary.Add(type,_pools[i]); 
             }
-
-            _summonTimer.SetFinishAction(()=>
-            {
-                SpawnObject(_poolDictionary[_currentData.Type]);
-                _summonTimer.Stop(true);
-            });
-
-            _summonTimer.SetTimer(_currentWave.WaveRate);
  
+            SetWave();
+            SetCurrentEnemy();
         }  
         
+
+        void Update()
+        {
+            if(_currentlySpawned.Count == _currentData.SpawnAmount)
+                SetCurrentEnemy();
+        }
+        private void SetWave()
+        { 
+            _currentWave = _levels?[0].Waves[0]; 
+            _waveTimer.SetTimer(_currentWave.WaveRate);
+            _waveTimer.RestartTimer();
+            _waveTimer.Stop(false);
+            _isCurrentWaveFinished = false;
+
+        }
+        private void SetCurrentEnemy()
+        { 
+            Debug.Log("Changing current enemy wave");
+            if(_currentDataIndex < _currentWave.EnemyDatas.Count - 1) 
+                _currentDataIndex++;
+            else 
+                _currentDataIndex = 0;  
+
+            _currentData = _levels[0].Waves[0].EnemyDatas[_currentDataIndex];
+            Debug.Log($"New enemy wave:{_currentDataIndex}");
+            _summonTimer.SetFinishAction(() =>
+            {
+                _summonTimer.Stop(true);
+                SpawnObject(_poolDictionary[_currentData.Type]);
+            });
+
+            _summonTimer.SetTimer(_currentWave.EnemyDatas[0].TimeAfterNextSpawn);
+        }
+
         private void SpawnObject(PrefabPool pool)
         {
             var x = pool.GetPrefab(true); 
@@ -76,6 +105,7 @@ namespace Enemy
             _currentlySpawned.Add(e.gameObject);
 
             _summonTimer.Stop(false);
+            
         }
 
         private void RemoveFromList(GameObject o) => _currentlySpawned.Remove(o);

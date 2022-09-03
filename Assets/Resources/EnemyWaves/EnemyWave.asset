@@ -17,7 +17,17 @@ MonoBehaviour:
   _wavePauseTime: 1
   _level: 0
   _difficulty: 0
+  _levelArea: 0
   _enemyDatas:
   - Type: 0
     SpawnAmount: 1
-    TimeAfterNext: 0
+    TimeAfterNextSpawn: 2
+    TimeAfterNextWave: 10
+  - Type: 1
+    SpawnAmount: 3
+    TimeAfterNextSpawn: 3
+    TimeAfterNextWave: 0
+  - Type: 0
+    SpawnAmount: 4
+    TimeAfterNextSpawn: 2
+    TimeAfterNextWave: 0
