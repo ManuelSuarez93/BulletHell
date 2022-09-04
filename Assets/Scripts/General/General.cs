@@ -37,21 +37,28 @@ namespace General
             } 
         } 
         [System.Serializable]
-    public struct EnemyTypeData
-        {
-            public EnemyType Type;
-            public int SpawnAmount;
-            public float TimeAfterNextSpawn;
-            public float TimeAfterNextWave;
-        }
-        [System.Serializable]
-        public struct Ship
-        {
-            public string Name;
-            public SpecialType Special;
-            public WeaponType Weapon;
-            public GameObject ShipObject; 
-        }
+    public struct WavePartData
+    {
+        public EnemyType Type;
+        public int SpawnAmount;
+        public int WaveNumber;
+        public float TimeAfterNextSpawn;
+        public float TimeAfterNextWave;
+        public int StartingGridX, 
+                    StartingGridY, 
+                    EndGridX, 
+                    EndGridY, 
+                    GridSeparationX, 
+                    GridSeparationY;
     }
+    [System.Serializable]
+    public struct Ship
+    {
+        public string Name;
+        public SpecialType Special;
+        public WeaponType Weapon;
+        public GameObject ShipObject; 
+    }
+}
     
 }

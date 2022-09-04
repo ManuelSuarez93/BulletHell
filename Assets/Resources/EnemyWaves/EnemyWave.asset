@@ -21,13 +21,34 @@ MonoBehaviour:
   _enemyDatas:
   - Type: 0
     SpawnAmount: 1
+    WaveNumber: 0
     TimeAfterNextSpawn: 2
     TimeAfterNextWave: 10
+    StartingGridX: 0
+    StartingGridY: 17
+    EndGridX: 11
+    EndGridY: 12
+    GridSeparationX: 2
+    GridSeparationY: 2
   - Type: 1
     SpawnAmount: 3
+    WaveNumber: 0
     TimeAfterNextSpawn: 3
     TimeAfterNextWave: 0
+    StartingGridX: 0
+    StartingGridY: 0
+    EndGridX: 0
+    EndGridY: 0
+    GridSeparationX: 0
+    GridSeparationY: 0
   - Type: 0
     SpawnAmount: 4
+    WaveNumber: 0
     TimeAfterNextSpawn: 2
     TimeAfterNextWave: 0
+    StartingGridX: 0
+    StartingGridY: 0
+    EndGridX: 0
+    EndGridY: 0
+    GridSeparationX: 0
+    GridSeparationY: 0

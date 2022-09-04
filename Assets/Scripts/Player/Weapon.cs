@@ -40,14 +40,14 @@ namespace Player
             _timer.Stop(false);
         }
                 
-        public void Shoot(Transform transform, Vector3 vectorDirection = default(Vector3))
+        public void Shoot(Transform transform, Direction direction = default(Direction))
         {
             if(!_canShoot) return;
 
                 var x = _pool.GetPrefab(true);
             x.transform.position = transform.position; 
             var proj = x.GetComponent<Projectile>();
-            proj.SetDirection(_isSupportWeapon? VectorDirection(_direction) :  vectorDirection);
+            proj.SetDirection(_isSupportWeapon ? _direction : direction);
             proj.SetPool(_pool);
             proj.SetSpeed(_currentData.ProjectileSpeed);
             proj.SetDamage(_currentData.Damage);

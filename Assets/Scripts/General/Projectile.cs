@@ -3,6 +3,7 @@ using UnityEngine;
 using Pooling;
 using System.Collections.Generic;
 using System.Collections;
+using static General.Global;
 
 namespace General
 {
@@ -13,7 +14,7 @@ namespace General
         [SerializeField] LayerMask _collisionLayer;
         [SerializeField] LayerMask _endOfLevelLayer;
         private float _speed;
-        private Vector3 _direction;
+        private Direction _direction;
         private int _damage;
         private PrefabPool _pool;  
         private Transform _follow;
@@ -21,8 +22,9 @@ namespace General
         private bool _damageOnStay = false;
         private List<Health> _objectsToDamage = new List<Health>();
 
-        #region Properties
-        public void SetDirection(Vector3 direction) => _direction = direction; 
+        #region Properties 
+        public void SetDirection(Direction newDirection) => _direction = newDirection;  
+        public void SetFollow(Transform newFollow) => _follow = newFollow;
         public void SetPool(PrefabPool newPool) => _pool = newPool;
         public void SetDamage(int damage) => _damage = damage;
         public void SetSpeed(float speed) => _speed = speed;
@@ -49,7 +51,7 @@ namespace General
                 if(_follosTarget)
                     transform.position = _follow.position;
                 else
-                    transform.Translate(_direction * Time.deltaTime * _speed);
+                    transform.Translate(VectorDirection(_direction) * Time.deltaTime * _speed);
 
             }
         }
@@ -76,11 +78,7 @@ namespace General
                 if(_destroyOnEnd) ReturnObjectToPool();  
         }
 
-        void OnTriggerExit(Collider other)
-        {
-            _objectsToDamage.Remove(other.GetComponent<Health>());
-        }
-        public void SetFollow(Transform newFollow) => _follow = newFollow;
+        void OnTriggerExit(Collider other) => _objectsToDamage.Remove(other.GetComponent<Health>());
         public void ReturnObjectToPool() => _pool.ReturnPrefab(this.gameObject, true);
         
         IEnumerator DamageByTime()

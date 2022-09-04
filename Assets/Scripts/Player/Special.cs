@@ -71,22 +71,22 @@ namespace Player
 
         }
          
-        public void UseSpecialcial(Transform origin, Vector3 vectorDirection, SpecialType type)
+        public void UseSpecialcial(Transform origin, Direction direction, SpecialType type)
         {   
             if(!_canUseSpecial) return;
 
             switch(type)
             {
-                case SpecialType.Shotgun: Shotgun(origin, vectorDirection); break;
-                case SpecialType.Explosion: Shotgun(origin, vectorDirection); break;
-                case SpecialType.Laser: Laser(origin, vectorDirection); break;
+                case SpecialType.Shotgun: Shotgun(origin, direction); break;
+                case SpecialType.Explosion: Shotgun(origin, direction); break;
+                case SpecialType.Laser: Laser(origin, direction); break;
             } 
             _canUseSpecial = false;
             _timer.Stop(false); 
         }
         
         #region Special methods
-        private void Shotgun(Transform origin, Vector3 vectorDirection)
+        private void Shotgun(Transform origin, Direction direction)
         {
             var angleDifference = _currentData.ProjectileAmount > 1 ? (180f / (_currentData.ProjectileAmount - 1)) : 0;
             var totalAngle = -90f;
@@ -100,19 +100,19 @@ namespace Player
                     totalAngle += angleDifference;
                 }
                 var proj = x.GetComponent<Projectile>();
-                proj.SetDirection(vectorDirection);
+                proj.SetDirection(direction);
                 proj.SetPool(_poolsDic[SpecialType.Shotgun]);
                 proj.SetSpeed(_currentData.ProjectileSpeed);
                 proj.SetDamage(_currentData.Damage);
             }
         }
 
-        private void Laser(Transform origin, Vector3 vectorDirection)
+        private void Laser(Transform origin, Direction direction)
         {
             var x = _poolsDic[SpecialType.Laser].GetPrefab(true);
             x.transform.localPosition = origin.localPosition; 
             var proj = x.GetComponent<Projectile>();
-            proj.SetDirection(vectorDirection);  
+            proj.SetDirection(direction);  
             proj.SetDamage(_currentData.Damage);
             proj.SetPool(_poolsDic[SpecialType.Laser]);
             proj.SetFollow(GameManager.Instance.PlayerTransform);

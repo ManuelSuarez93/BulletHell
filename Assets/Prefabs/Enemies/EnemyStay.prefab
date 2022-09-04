@@ -256,6 +256,50 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3234803373512471079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7429280755582461152}
+  - component: {fileID: 5515968189962152069}
+  m_Layer: 7
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7429280755582461152
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234803373512471079}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4210506386429683006}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5515968189962152069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234803373512471079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97296afb20a6d27408d1f8cb95c80805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _time: 0
 --- !u!1 &4210506386429682977
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +334,7 @@ Transform:
   - {fileID: 7904700824697101564}
   - {fileID: 4072783271201779428}
   - {fileID: 1486326432234914477}
+  - {fileID: 7429280755582461152}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -326,20 +371,20 @@ MonoBehaviour:
   _endOfLevelLayer:
     serializedVersion: 2
     m_Bits: 1024
-  _objective: {fileID: 0}
-  _player: {fileID: 0}
+  _animation: 0
   _animationSpeed: 0
   _amplitude: 0
   _animationRate: 0.5
-  _animation: 0
   _finishInObjective: 1
+  _direction: 5
   _finishInPlayer: 0
-  _enemyShoot: 1
-  _shootAtPlayer: 0
+  _shootPlayer: 0
   _projectiles: {fileID: 8471215602704232431}
   _shootRate: 3
   _shootSpeed: 2
   _shootPosition: {fileID: 4072783271201779428}
+  _useTimer: 1
+  _timer: {fileID: 5515968189962152069}
 --- !u!114 &9017930788965479643
 MonoBehaviour:
   m_ObjectHideFlags: 0

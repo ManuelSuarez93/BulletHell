@@ -50,14 +50,14 @@ namespace Player
 
         public void Update()
         {
-            _weapon.Shoot(_ships[_currentShipIndex].ShipObject.transform, VectorDirection(_projectileDirection));  
+            _weapon.Shoot(_ships[_currentShipIndex].ShipObject.transform, _projectileDirection);  
             _supportW1.Shoot(_ships[_supportShipIndex[0]].ShipObject.transform); 
             _supportW2.Shoot(_ships[_supportShipIndex[1]].ShipObject.transform); 
             
         }
         #endregion
         
-        public void UseSpecial() => _special.UseSpecialcial(transform, VectorDirection(_projectileDirection), _ships[_currentShipIndex].Special);
+        public void UseSpecial() => _special.UseSpecialcial(transform, _projectileDirection, _ships[_currentShipIndex].Special);
 
         public void SwitchShip()
         { 

@@ -12,12 +12,10 @@ namespace Enemy
         [SerializeField] private List<PrefabPool> _pools;
         [SerializeField] private Timer _waveTimer, _summonTimer;
         [SerializeField] private Collider _player;
-        [Header("Enemy settings")]
-        [SerializeField] private Direction _direction = Direction.up;
+        [Header("Enemy settings")] 
         [SerializeField] private float _rate = 1f;
         [SerializeField] private float _speed = 5f;
-        [SerializeField] private bool _finishInObjective = false;
-        [SerializeField] private Collider _objective;
+        [SerializeField] private bool _finishInObjective = false; 
 
         [Header("Enemy movement settings")]
         [SerializeField] private bool _animate = false;
@@ -30,11 +28,14 @@ namespace Enemy
         [SerializeField] private List<Transform> _spawnPoints;        
         [Header("Grid")]
         [SerializeField] private GridMap _grid;
+        private Collider _currentGridPoint;
+        private Vector2Int _currentGridPointInt;
         private List<EnemyData> _enemies; 
         private List<Level> _levels;
-        private EnemyTypeData _currentData;
+        private WavePartData _currentData;
         private EnemyWave _currentWave;
         private bool _isCurrentWaveFinished;
+        private bool _isWavePartEnded;
         private int _currentDataIndex;
         private Dictionary<EnemyType, PrefabPool> _poolDictionary = new Dictionary<EnemyType, PrefabPool>();
         List<GameObject> _currentlySpawned = new List<GameObject>(); 
@@ -59,7 +60,7 @@ namespace Enemy
         }  
         
 
-        void Update()
+        private void Update()
         {
             if(_currentlySpawned.Count == _currentData.SpawnAmount)
                 SetCurrentEnemy();
@@ -73,16 +74,15 @@ namespace Enemy
             _isCurrentWaveFinished = false;
 
         }
+        
         private void SetCurrentEnemy()
-        { 
-            Debug.Log("Changing current enemy wave");
+        {  
             if(_currentDataIndex < _currentWave.EnemyDatas.Count - 1) 
                 _currentDataIndex++;
             else 
                 _currentDataIndex = 0;  
 
-            _currentData = _levels[0].Waves[0].EnemyDatas[_currentDataIndex];
-            Debug.Log($"New enemy wave:{_currentDataIndex}");
+            _currentData = _levels[0].Waves[0].EnemyDatas[_currentDataIndex]; 
             _summonTimer.SetFinishAction(() =>
             {
                 _summonTimer.Stop(true);
@@ -90,6 +90,8 @@ namespace Enemy
             });
 
             _summonTimer.SetTimer(_currentWave.EnemyDatas[0].TimeAfterNextSpawn);
+            _currentGridPointInt = new Vector2Int(_currentData.StartingGridX, _currentData.StartingGridY);
+            _currentGridPoint = _grid.GetGridPoint(_currentGridPointInt); 
         }
 
         private void SpawnObject(PrefabPool pool)
@@ -97,18 +99,52 @@ namespace Enemy
             var x = pool.GetPrefab(true); 
             x.transform.localPosition = _spawnPoints.Count > 0 ? _spawnPoints[Random.Range(0, _spawnPoints.Count)].position : transform.position;
             var e = x.GetComponent<EnemyBehaviour>();
-            e.SetDirection(VectorDirection(_direction));
             e.SetPool(pool);
             e.SetSpeed(_speed);
             e.SetOnDisable(() => RemoveFromList(e.gameObject));
-            e.SetObjective(_objective, _player); 
+
+            SetCurrentGridPoint();
+            e.SetObjective(_currentGridPoint); 
+
+
             _currentlySpawned.Add(e.gameObject);
 
             _summonTimer.Stop(false);
             
         }
+        public void SetCurrentGridPoint()
+        { 
+            if(GoDown)
+            {
+                if(_currentGridPointInt.y >= _currentData.EndGridY)
+                {
+                    _currentGridPointInt.x +=_currentData.GridSeparationX; 
+                    if(_currentGridPointInt.x > _currentData.EndGridX)  
+                    { 
+                        _currentGridPointInt.x = _currentData.StartingGridX;   
+                        _currentGridPointInt.y += _currentData.GridSeparationY; 
+                    }
+                }
+            }
+            else
+            {
+                if(_currentGridPointInt.y <= _currentData.EndGridY)
+                {
+                    _currentGridPointInt.x +=_currentData.GridSeparationX; 
+                    if(_currentGridPointInt.x > _currentData.EndGridX)  
+                    {
+                        _currentGridPointInt.x = _currentData.StartingGridX;   
+                        _currentGridPointInt.y -= _currentData.GridSeparationY;  
+                    }
+                }
+            }
+           
 
+            _currentGridPoint = _grid.GetGridPoint(_currentGridPointInt);
+          
+        }
         private void RemoveFromList(GameObject o) => _currentlySpawned.Remove(o);
+        public bool GoDown => _currentData.StartingGridY > _currentData.EndGridY;
     }
  
 }

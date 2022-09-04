@@ -243,20 +243,20 @@ MonoBehaviour:
   _endOfLevelLayer:
     serializedVersion: 2
     m_Bits: 1024
-  _objective: {fileID: 0}
-  _player: {fileID: 0}
+  _animation: 1
   _animationSpeed: 0.5
   _amplitude: 7
   _animationRate: 0.2
-  _animation: 1
   _finishInObjective: 0
+  _direction: 5
   _finishInPlayer: 0
-  _enemyShoot: 0
-  _shootAtPlayer: 0
+  _shootPlayer: 0
   _projectiles: {fileID: 0}
   _shootRate: 0
   _shootSpeed: 0
   _shootPosition: {fileID: 0}
+  _useTimer: 0
+  _timer: {fileID: 0}
 --- !u!114 &-5873933786686325594
 MonoBehaviour:
   m_ObjectHideFlags: 0
