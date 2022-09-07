@@ -115,7 +115,7 @@ namespace Player
             proj.SetDirection(direction);  
             proj.SetDamage(_currentData.Damage);
             proj.SetPool(_poolsDic[SpecialType.Laser]);
-            proj.SetFollow(GameManager.Instance.PlayerTransform);
+            proj.SetTarget(GameManager.Instance.PlayerTransform);
             var timer = proj.GetComponent<Timer>();
             timer.SetFinishAction(() => proj.ReturnObjectToPool());
                 proj.SetPool(_poolsDic[SpecialType.Laser]);

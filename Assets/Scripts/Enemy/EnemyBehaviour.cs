@@ -8,6 +8,7 @@ public class EnemyBehaviour : MonoBehaviour, IMovable, IPoolable
     #region Fields
     [SerializeField] private Health _health;
     [SerializeField] private LayerMask _collisionLayer, _endOfLevelLayer; 
+    [SerializeField] private GameObject _damageParticle;
 
     [Header("Moving settings")]
     [SerializeField] private bool _animation = false;
@@ -30,8 +31,8 @@ public class EnemyBehaviour : MonoBehaviour, IMovable, IPoolable
     private int _damage;
     private float _speed;
     private PrefabPool _pool; 
-    private Action _onDisable;
-    private Collider _girdObj;   
+    private Action _onDisable; 
+    private Transform _objective;   
     #endregion
 
     #region Setters
@@ -39,7 +40,7 @@ public class EnemyBehaviour : MonoBehaviour, IMovable, IPoolable
     public void SetSpeed(float speed) => _speed = speed;
     public void SetDamage(int damage) => _damage = damage;
     public void SetPool(PrefabPool newPool) => _pool = newPool;
-    public void SetObjective(Collider objective) => _girdObj = objective;
+    public void SetObjective(Transform newObjective) => _objective = newObjective;
     public void SetAnimation(bool animate, float amplitude = 0f, float animationSpeed = 0f)
     {
         _animation = animate;
@@ -70,11 +71,11 @@ public class EnemyBehaviour : MonoBehaviour, IMovable, IPoolable
     { 
         if(_finishInObjective)
         { 
-            if (_girdObj != null && Vector3.Distance(_girdObj.transform.position, transform.position) > 0) 
+            if (_objective != null && Vector3.Distance(_objective.position, transform.position) > 0) 
                 transform.position = Vector3.MoveTowards(transform.position, 
-                                    new Vector3(_girdObj.transform.position.x, 
+                                    new Vector3(_objective.position.x, 
                                                 transform.position.y,
-                                                 _girdObj.transform.position.z),
+                                                 _objective.transform.position.z),
                                     Time.deltaTime * _speed); 
         } 
         else
@@ -99,7 +100,12 @@ public class EnemyBehaviour : MonoBehaviour, IMovable, IPoolable
     }
     public void SetOnDisable(Action action) => _onDisable = action; 
     private void OnDisable() => _onDisable?.Invoke();
-    private void AddToScore() => GameManager.Instance.SetScore(GameManager.Instance.Score + 1);
+    private void AddToScore()
+    {
+        GameManager.Instance.SetScore(GameManager.Instance.Score + 1);
+        UIManager.Instance.SetScoreText();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -119,7 +125,7 @@ public class EnemyBehaviour : MonoBehaviour, IMovable, IPoolable
         x.transform.localPosition = _shootPosition.localPosition;
         var e = x.GetComponent<Projectile>();
         if(_shootPlayer)
-            e.SetFollow(GameManager.Instance.PlayerTransform);
+            e.SetTarget(GameManager.Instance.PlayerTransform);
         else
             e.SetDirection( _direction);
         e.SetPool(_projectiles);
@@ -135,4 +141,6 @@ public class EnemyBehaviour : MonoBehaviour, IMovable, IPoolable
 
         return p;
     }
+
+    public void InstantiateParticleEffect() => Instantiate(_damageParticle, transform.position, Quaternion.identity);
 }

@@ -300,6 +300,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _time: 0
+  DestroyOnFinish: 0
+  _useUnityFinishEvent: 0
+  _useUnityEventUpdate: 0
+  _onFinishEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onUpdateEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4210506386429682977
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +322,7 @@ GameObject:
   - component: {fileID: 5395190040527379222}
   - component: {fileID: 9017930788965479643}
   - component: {fileID: 8471215602704232431}
+  - component: {fileID: -4637997489232897126}
   m_Layer: 7
   m_Name: EnemyStay
   m_TagString: Untagged
@@ -349,9 +359,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Height: 4
+  m_Direction: 2
+  m_Center: {x: 0.22, y: 0, z: -1.25}
 --- !u!114 &5395190040527379222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,6 +381,7 @@ MonoBehaviour:
   _endOfLevelLayer:
     serializedVersion: 2
     m_Bits: 1024
+  _damageParticle: {fileID: 6563990113905362503, guid: 9ff5023b1eaaeae4b9eb1ebbe3bd5ac4, type: 3}
   _animation: 0
   _animationSpeed: 0
   _amplitude: 0
@@ -397,7 +408,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa64680115d42dd47a16271b521c6583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 30
+  _maxHealth: 10
+  _healEvents:
+    OnDamageEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1838076473523639147, guid: 6ac2475b0691cf14cb0884d566b13d33, type: 3}
+          m_TargetAssemblyTypeName: EnemyBehaviour, Assembly-CSharp
+          m_MethodName: InstantiateParticleEffect
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeathEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    OnHealEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  _useTimer: 0
+  _timeBeforeHealAgain: 0
+  _timeBeforeDamage: 0
 --- !u!114 &8471215602704232431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +449,22 @@ MonoBehaviour:
   _prefab: {fileID: 7235867045612599213, guid: b42c19c3a39721449853219918c59de3, type: 3}
   _maxPoolSize: 100
   _initializeOnAwake: 1
+--- !u!54 &-4637997489232897126
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210506386429682977}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8432694119208778034
 GameObject:
   m_ObjectHideFlags: 0

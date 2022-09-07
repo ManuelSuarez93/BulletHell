@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5231553206429393470}
-  - component: {fileID: 5841490872753951230}
   - component: {fileID: 413839653960980701}
   - component: {fileID: 115077688854223437}
+  - component: {fileID: 7999965722054949030}
   m_Layer: 8
   m_Name: Projectile
   m_TagString: Untagged
@@ -34,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5841490872753951230
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687127468366145198}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &413839653960980701
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,12 +62,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b241d22d74c49e48a64bce0cd560972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyOnEnd: 1
+  _isMoving: 1
+  _follosTarget: 0
+  _damageRate: 0
   _collisionLayer:
     serializedVersion: 2
     m_Bits: 128
   _endOfLevelLayer:
     serializedVersion: 2
     m_Bits: 2048
+--- !u!136 &7999965722054949030
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687127468366145198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5528282705495769667
 GameObject:
   m_ObjectHideFlags: 0

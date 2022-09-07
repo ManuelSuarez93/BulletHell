@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Machine Gun
   m_EditorClassIdentifier: 
   WeaponType: 2
-  ShootRate: 0.15
+  ShootRate: 0.25
   Damage: 1
   ProjectileSpeed: 15
-  Projectile: {fileID: 1687127468366145198, guid: de21e8f6df9098d4cb8da10f51f185c2, type: 3}
+  Projectile: {fileID: 1334605313036165779, guid: 84f253b41ea1e47489a1fc6b9eb00e92, type: 3}

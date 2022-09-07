@@ -15,5 +15,5 @@ MonoBehaviour:
   WeaponType: 3
   ShootRate: 2
   Damage: 20
-  ProjectileSpeed: 5
+  ProjectileSpeed: 8
   Projectile: {fileID: 3613366391228593338, guid: 553072657892ac24ea754f7b8aed3f5e, type: 3}

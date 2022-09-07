@@ -65,9 +65,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyOnEnd: 0
   _isMoving: 1
-  _follosTarget: 1
+  _followsTarget: 0
+  _followsPlayer: 1
   _damageRate: 0.1
-  _collisionLayer:
+  _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   _endOfLevelLayer:
@@ -83,7 +84,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.05
+  m_Radius: 0.25
   m_Height: 50
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 25}
@@ -100,6 +101,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _time: 2
+  DestroyOnFinish: 0
+  _useUnityFinishEvent: 0
+  _useUnityEventUpdate: 0
+  _onFinishEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onUpdateEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9008169026442361586
 GameObject:
   m_ObjectHideFlags: 0

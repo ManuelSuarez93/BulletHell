@@ -21,8 +21,6 @@ namespace Player
         private int _currentShipIndex;  
         private int[] _supportShipIndex= new int[2];
         private float _timer;  
-        
-        
         private Vector3[] _shipPositions = new Vector3[3];
         #endregion 
 
@@ -31,11 +29,10 @@ namespace Player
         {    
             for(int i=0; i < _shipPositions.Length; i++) 
                 _shipPositions[i] = _ships[i].ShipObject.transform.localPosition;
-
-            _weapon.InitializeWeapon(_ships[0]);  
+            
+            _weapon.InitializeWeapon(_ships[1]);  
             _supportW1.InitializeWeapon(_ships[0]);  
-            _supportW2.InitializeWeapon(_ships[0]); 
-            _weapon.SetWeapon((WeaponType)0);
+            _supportW2.InitializeWeapon(_ships[0]);  
             _special.InitializeSpecial();
         }
 

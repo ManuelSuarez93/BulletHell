@@ -25,7 +25,7 @@ MonoBehaviour:
     TimeAfterNextSpawn: 2
     TimeAfterNextWave: 10
     StartingGridX: 0
-    StartingGridY: 17
+    StartingGridY: 16
     EndGridX: 11
     EndGridY: 12
     GridSeparationX: 2
@@ -47,8 +47,8 @@ MonoBehaviour:
     TimeAfterNextSpawn: 2
     TimeAfterNextWave: 0
     StartingGridX: 0
-    StartingGridY: 0
-    EndGridX: 0
-    EndGridY: 0
-    GridSeparationX: 0
-    GridSeparationY: 0
+    StartingGridY: 15
+    EndGridX: 11
+    EndGridY: 10
+    GridSeparationX: 2
+    GridSeparationY: 2
