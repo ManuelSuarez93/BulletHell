@@ -1,5 +1,8 @@
-# BulletHell
+# Deep Waters
 
-Bullet Hell game for Android
+Deep Waters game for Android.
 
-Currently working
+Currently in development...
+
+<img src="Capture.JPG" alt="Alt text" title="Optional title">
+
