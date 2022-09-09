@@ -42,7 +42,7 @@ MonoBehaviour:
     GridSeparationX: 0
     GridSeparationY: 0
   - Type: 0
-    SpawnAmount: 4
+    SpawnAmount: 1
     WaveNumber: 0
     TimeAfterNextSpawn: 2
     TimeAfterNextWave: 0

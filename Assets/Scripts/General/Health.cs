@@ -54,8 +54,8 @@ public class Health : MonoBehaviour
     {
         if(_canDamage)
         {
-            _currentHealth -= health;
             _healEvents.OnDamageEvent.Invoke(); 
+            _currentHealth -= health;
 
             if(_useTimer)
             {

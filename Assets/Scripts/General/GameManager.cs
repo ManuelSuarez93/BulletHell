@@ -17,6 +17,7 @@ namespace General
         public int Score => _score;
         public int Level => _currentLevel;
         public int Difficulty => _currentDifficulty;
+        public void SetScore(int newScore) => _score = newScore;
 
         void Awake()
         {
@@ -38,10 +39,11 @@ namespace General
             if(PlayerPrefs.GetInt("Highscore",0) < _score)
                 PlayerPrefs.SetInt("Highscore", _score);
             UIManager.Instance.SetGameOverScreen();
+
             yield return new WaitForSeconds(3f); 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+            SceneManager.LoadScene("MainMenu");
         } 
-        public void SetScore(int newScore) => _score = newScore;
     }
 
 }

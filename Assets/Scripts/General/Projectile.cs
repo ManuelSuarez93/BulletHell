@@ -10,6 +10,7 @@ namespace General
 {
     public class Projectile: MonoBehaviour, IMovable, IPoolable
     { 
+        #region Fields
         [SerializeField] bool _destroyOnEnd = true, _isMoving = true, _followsTarget = false, _followsPlayer = false;
         [SerializeField] float _damageRate;
         [SerializeField] LayerMask _enemyLayer, _endOfLevelLayer;
@@ -21,6 +22,8 @@ namespace General
         private Timer _timer;
         private bool _damageOnStay = false;
         private List<Health> _objectsToDamage = new List<Health>();
+        private bool _isLookingForTarget;
+        #endregion
 
         #region Properties 
         public void SetDirection(Direction newDirection) => _direction = newDirection;  
@@ -29,6 +32,9 @@ namespace General
         public void SetDamage(int damage) => _damage = damage;
         public void SetSpeed(float speed) => _speed = speed;
         #endregion
+        public void ReturnObjectToPool() => _pool.ReturnPrefab(this.gameObject, true);
+
+        #region  Unity Methods
         void OnEnable() => StartCoroutine(DamageByTime());
         void OnDisable() => StopCoroutine(DamageByTime());
         private void Awake()
@@ -45,28 +51,36 @@ namespace General
          
         }
 
-        public void GetNearestTarget()
-        {
-            StartCoroutine(GetNearestTargetRoutine());
-        }
- 
+
         private void Update()
         {
             if(_isMoving)
             {
-                if(_followsTarget && _target)
+                if(_followsTarget)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime * _speed);
-                    transform.LookAt(_target);
-                }
-                if(_followsPlayer) 
+                    if(_target)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime * _speed);
+                        transform.LookAt(_target); 
+                    }
+                    else 
+                    {
+                        if(!_isLookingForTarget)
+                            GetNearestTarget(); 
+
+                        transform.Translate(VectorDirection(_direction) * Time.deltaTime * _speed);
+                    }
+                } 
+                  
+                else if (_followsPlayer) 
                     transform.position = GameManager.Instance.PlayerTransform.position; 
                 else
-                    transform.Translate(VectorDirection(_direction) * Time.deltaTime * _speed);
-
+                    transform.Translate(VectorDirection(_direction) * Time.deltaTime * _speed); 
             }
         }
-
+        #endregion
+        
+        #region On Trigger methods
         void OnTriggerStay(Collider other)
         { 
             if(!_destroyOnEnd && _damageOnStay && ((_enemyLayer & 1) << other.gameObject.layer) > 0)  
@@ -75,6 +89,7 @@ namespace General
                 _damageOnStay = false;
             }
         } 
+
         private void OnTriggerEnter(Collider other)
         {
             if ((_enemyLayer & 1 << other.gameObject.layer) > 0  ) 
@@ -89,8 +104,12 @@ namespace General
                 if(_destroyOnEnd) ReturnObjectToPool();  
         }
 
-        void OnTriggerExit(Collider other) => _objectsToDamage.Remove(other.GetComponent<Health>());
-        public void ReturnObjectToPool() => _pool.ReturnPrefab(this.gameObject, true);
+        private void OnTriggerExit(Collider other) => _objectsToDamage.Remove(other.GetComponent<Health>());
+        #endregion
+
+        #region Coroutines
+
+        public void GetNearestTarget() => StartCoroutine(GetNearestTargetRoutine());
         
         IEnumerator DamageByTime()
         { 
@@ -111,6 +130,7 @@ namespace General
 
         IEnumerator GetNearestTargetRoutine()
         {   
+            _isLookingForTarget = true;
             Debug.Log("Finding nearest target!");
             while(!_target)
             {
@@ -119,6 +139,7 @@ namespace General
                 if(hit.collider != null) 
                 {
                     _target = hit.collider.transform; 
+                    _isLookingForTarget = false;
                     Debug.Log("Target found!");
                 }
                 yield return null;
@@ -127,6 +148,7 @@ namespace General
             Debug.Log("Exiting finding target");
         }
         
+        #endregion
     }
 
 }
